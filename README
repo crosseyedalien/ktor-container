@@ -1,0 +1,36 @@
+The purpose of this project is to provide a basic Ktor container image. No frills, doesn't connect to anything else,
+just a starting point for Ktor.
+
+This project uses:
+OpenJDK 11
+Gradle 6.5.1
+Kotlin ???
+Ktor ???
+Netty ???
+
+Quickstart:
+1) Build the source. In the project root, run the following command:
+$ gradle build
+
+2) Build the docker image.
+$ docker build -t <repo:tag> .
+
+3) Run container.
+$ docker run -d -p 8080:8080 --name <ctr-name> <repo:tag>
+
+4) Check that the application is running at http://localhost:8080
+
+
+ROADMAP:
+1) Ktor documentation kind of sucks. All of the examples I have come across seem to use out-of-date software. So
+one of the first things I want to do is bring that up-to-date. Trying to build a Ktor application with IntelliJ IDEA
+results in errors when I try to follow their online directions.
+- most recent versions of:
+--- OpenJDK
+--- Gradle
+--- Kotlin
+--- Ktor
+--- Netty (or equivalent)
+2) There seems to be confusion surrounding Ktor and Java 9 (jdk9+). Not sure what the answer is. The latest Gradle
+will build this application, but the version of Netty throws a lot of exceptions. Some forums are saying this is a
+problem with Ktor's compatibility with Java 9.
