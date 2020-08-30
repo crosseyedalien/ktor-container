@@ -1,11 +1,10 @@
 FROM alpine:latest
 
-ARG JDK_VERSION=openjdk11
+ARG JDK_VERSION=openjdk8
 ARG JAR_ARG=my-application.jar
 ENV JAR_FILE=${JAR_ARG}
 
-RUN apk update
-RUN apk add ${JDK_VERSION}
+RUN apk update && apk add ${JDK_VERSION}
 
 ENV APPLICATION_USER ktor
 RUN adduser --no-create-home --gecos '' --disabled-password $APPLICATION_USER
@@ -22,4 +21,7 @@ EXPOSE 8080
 
 USER $APPLICATION_USER
 
-CMD ["/app/run.sh"]
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/ || exit 1
+
+CMD /app/run.sh
